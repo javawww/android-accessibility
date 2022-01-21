@@ -56,6 +56,11 @@ class HomeFragment : Fragment() {
         buttonInsufficientContrast.setOnClickListener(Navigation.createNavigateOnClickListener(
                 R.id.action_homeFragment_to_insufficientContrastFragment, null))
 
+        val baiduMap = view.findViewById<Button>(R.id.baidu_map_button)
+        baiduMap.setOnClickListener(Navigation.createNavigateOnClickListener(
+                R.id.action_baiduMap_to_expandTouchAreaFragment,null
+        ))
+
     }
 }
 

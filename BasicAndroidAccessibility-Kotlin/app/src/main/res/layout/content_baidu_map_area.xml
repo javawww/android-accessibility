@@ -29,16 +29,9 @@
     tools:context=".ExpandTouchAreaFragment"
     tools:showIn="@layout/activity_main">
 
-    <ImageButton
-        android:id="@+id/play_pause_toggle_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:background="@null"
-        android:contentDescription="@null" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/value_song_artists"
-        />
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true" />
 </RelativeLayout>

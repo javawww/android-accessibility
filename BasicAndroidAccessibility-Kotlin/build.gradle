@@ -1,14 +1,17 @@
 buildscript {
     ext {
-        kotlinVersion = '1.3.30'
+        kotlinVersion = '1.5.30'
         navigationVersion = "2.0.0"
     }
     repositories {
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        mavenCentral()
         jcenter()
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.0'
+        classpath 'com.android.tools.build:gradle:4.2.2'
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
@@ -16,8 +19,14 @@ buildscript {
 
 allprojects {
     repositories {
+        mavenCentral()
         jcenter()
         google()
+        // 阿里云云效仓库，提升编译速度：https://maven.aliyun.com/mvn/guide
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
     }
 }
 

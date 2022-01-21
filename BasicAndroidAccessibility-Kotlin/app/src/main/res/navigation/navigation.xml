@@ -39,6 +39,9 @@
             android:id="@+id/action_homeFragment_to_expandTouchAreaFragment"
             app:destination="@id/expandTouchAreaFragment" />
         <action
+            android:id="@+id/action_baiduMap_to_expandTouchAreaFragment"
+            app:destination="@id/baiduMapFragment" />
+        <action
             android:id="@+id/action_homeFragment_to_insufficientContrastFragment"
             app:destination="@id/insufficientContrastFragment" />
     </fragment>
@@ -57,6 +60,13 @@
         android:name="com.example.android.basicandroidaccessibility.ExpandTouchAreaFragment"
         android:label="@string/fragment_expand_touch_area"
         tools:layout="@layout/fragment_expand_touch_area" />
+
+    <fragment
+        android:id="@+id/baiduMapFragment"
+        android:name="com.example.android.basicandroidaccessibility.BaiduMapFragment"
+        android:label="@string/fragment_baidu_map_area"
+        tools:layout="@layout/fragment_baidu_map_area" />
+
     <fragment
         android:id="@+id/insufficientContrastFragment"
         android:name="com.example.android.basicandroidaccessibility.InsufficientContrastFragment"

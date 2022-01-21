@@ -15,51 +15,52 @@
 -->
 
 <resources>
-    <string name="app_name">Basic Android Accessibility Codelab</string>
+    <string name="app_name">基本的 Android 无障碍 Codelab</string>
 
-    <string name="fragment_content_labeling">Content Labeling Screen</string>
-    <string name="fragment_live_region">Live Region Screen</string>
-    <string name="fragment_content_grouping">Content Grouping Screen</string>
+    <string name="fragment_content_labeling">内容标签屏幕</string>
+    <string name="fragment_live_region">实时区域屏幕</string>
+    <string name="fragment_content_grouping">内容分组屏幕</string>
     <string name="fragment_home">Main Screen</string>
-    <string name="fragment_expand_touch_area">Expand Touch Area Screen</string>
-    <string name="fragment_insufficient_contrast">Insufficient Contrast Screen</string>
+    <string name="fragment_expand_touch_area">扩展触摸屏</string>
+    <string name="fragment_baidu_map_area">百度地图</string>
+    <string name="fragment_insufficient_contrast">对比度不足的屏幕</string>
 
     <!-- These three strings are currently unused but are added to the code during the codelab -->
-    <string name="play">Play</string>
-    <string name="pause">Pause</string>
-    <string name="share">Share</string>
+    <string name="play">播放</string>
+    <string name="pause">暂停</string>
+    <string name="share">分享</string>
 
-    <string name="which_android_version">Which Android version brought you Material Design?</string>
+    <string name="which_android_version">哪个Android版本为你带来了Material Design?</string>
     <string name="lollipop">Lollipop</string>
 
-    <string name="correct">Correct!</string>
-    <string name="incorrect">Incorrect</string>
+    <string name="correct">正确!</string>
+    <string name="incorrect">不正确</string>
 
-    <string name="enter_favorite_song">Enter favorite song</string>
-    <string name="jukebox">Jukebox</string>
+    <string name="enter_favorite_song">输入喜欢的歌曲</string>
+    <string name="jukebox">点唱机</string>
 
-    <string name="add_item_fab">Add item</string>
+    <string name="add_item_fab">添加项目</string>
 
     <string name="go">Go</string>
 
-    <string name="song_edit_text_label">Song</string>
+    <string name="song_edit_text_label">歌曲</string>
 
-    <string name="song_details">Song Details</string>
-    <string name="label_song_name">Name</string>
+    <string name="song_details">歌曲详情</string>
+    <string name="label_song_name">名字</string>
     <string name="value_song_name">Hey Jude</string>
-    <string name="label_song_artists">Artists</string>
+    <string name="label_song_artists">艺术家</string>
     <string name="value_song_artists">The Beatles</string>
-    <string name="label_song_cost">Cost</string>
+    <string name="label_song_cost">成本</string>
     <string name="value_song_cost">$1.45</string>
 
     <string name="lorem_ipsum_title">Lorem Ipsum</string>
     <string name="lorem_ipsum">
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-        Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
-        ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
-        Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate
-        eget, arcu.
+        痛苦本身就是爱，是客户的痛苦。埃涅阿斯需要痛苦。埃涅阿斯质量当山脉、
+        你的家园、你的盟友和伟大的神灵劳作时，一只可笑的老鼠就会诞生。只要是猫，
+        也不是赔偿，孩子欧盟，任何价格，sem。对任何质量都没有后果。直到脚是正义的，
+        我们的客户或者，香蕉而不是，超级英雄需要，弓。
     </string>
 
-    <string name="fix_low_contrast">Fix low contrast</string>
+    <string name="fix_low_contrast">修复低对比度</string>
+    <string name="baidu_map_txt">百度地图</string>
 </resources>
