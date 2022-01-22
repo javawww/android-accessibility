@@ -21,17 +21,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ExpandTouchAreaFragment"
+    tools:context=".BaiduMapFragment"
     tools:showIn="@layout/activity_main">
+    <ImageView
+        android:id="@+id/dingwei"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/ic_music_note"
+        android:background="@color/white"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:clickable="true"/>
 
-    <com.baidu.mapapi.map.MapView
+    <com.baidu.mapapi.map.TextureMapView
         android:id="@+id/bmapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true" />
+
+    <TextView
+        android:id="@+id/position_text_view"
+        android:background="@color/white"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#6495ED"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:visibility="gone"/>
 </RelativeLayout>
