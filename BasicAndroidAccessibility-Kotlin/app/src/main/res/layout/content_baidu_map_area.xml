@@ -24,6 +24,13 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".BaiduMapFragment"
     tools:showIn="@layout/activity_main">
+
+    <com.baidu.mapapi.map.TextureMapView
+        android:id="@+id/bmapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true" />
+
     <ImageView
         android:id="@+id/dingwei"
         android:layout_width="35dp"
@@ -34,12 +41,6 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
         android:clickable="true"/>
-
-    <com.baidu.mapapi.map.TextureMapView
-        android:id="@+id/bmapView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true" />
 
     <TextView
         android:id="@+id/position_text_view"
