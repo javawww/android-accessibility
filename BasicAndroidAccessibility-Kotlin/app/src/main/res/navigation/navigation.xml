@@ -23,7 +23,7 @@
         tools:layout="@layout/fragment_live_region" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.android.basicandroidaccessibility.HomeFragment"
+        android:name="com.example.android.basicandroidaccessibility.ui.home.HomeFragment"
         android:label="@string/fragment_home"
         tools:layout="@layout/fragment_home">
         <action

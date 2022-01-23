@@ -16,6 +16,9 @@
 
 <resources>
     <string name="app_name">基本的 Android 无障碍 Codelab</string>
+    <string name="title_home">主页</string>
+    <string name="title_dashboard">仪表盘</string>
+    <string name="title_notifications">通知</string>
 
     <string name="fragment_content_labeling">内容标签屏幕</string>
     <string name="fragment_live_region">实时区域屏幕</string>
