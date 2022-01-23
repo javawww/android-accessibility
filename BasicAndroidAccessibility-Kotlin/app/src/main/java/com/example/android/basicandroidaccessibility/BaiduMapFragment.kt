@@ -139,9 +139,6 @@ open class BaiduMapFragment : Fragment() {
             if (location.locType==167){
                 return
             }
-            if (location.locType==61){
-                hideLoading()
-            }
             lat = location.latitude
             lon = location.longitude
             var json = Gson().toJson(location)
@@ -167,6 +164,7 @@ open class BaiduMapFragment : Fragment() {
     }
 
     private fun getdata(ll: LatLng) {
+        hideLoading()
         val geoCoder = GeoCoder.newInstance()
         val listener: OnGetGeoCoderResultListener = object : OnGetGeoCoderResultListener {
             // 反地理编码查询结果回调函数

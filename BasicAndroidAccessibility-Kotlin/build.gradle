@@ -23,10 +23,10 @@ allprojects {
         jcenter()
         google()
         // 阿里云云效仓库，提升编译速度：https://maven.aliyun.com/mvn/guide
-        maven { url 'https://jitpack.io' }
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://jitpack.io' }
     }
 }
 
