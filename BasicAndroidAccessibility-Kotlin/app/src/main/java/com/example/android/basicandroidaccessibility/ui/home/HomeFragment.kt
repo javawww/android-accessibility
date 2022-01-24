@@ -8,12 +8,11 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.android.basicandroidaccessibility.R
 import com.example.android.basicandroidaccessibility.databinding.FragmentHomeBinding
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -27,6 +26,18 @@ class HomeFragment : Fragment() {
     private val executor: ExecutorService = Executors.newSingleThreadExecutor()
     // 该属性仅在 onCreateView 和onDestroyView
     private val binding get() = _binding!!
+    // 列表数据
+    private lateinit var listView: ListView
+    // 创建一个字符串类型数组（fruitNames），其中包含不同水果图像的名称
+    private val fruitNames=arrayOf("Banana","Grape","Guava","Mango","Orange","Watermelon")
+    // 创建一个整数类型数组（fruitImageIds），其中包含不同水果图像的 ID
+    private val fruitImageIds=arrayOf(
+            R.drawable.abc_vector_test,
+            R.drawable.bn_dest_blue,
+            R.drawable.bn_dest_blue,
+            R.drawable.bn_dest_blue,
+            R.drawable.bn_dest_blue,
+            R.drawable.bn_dest_blue)
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -67,13 +78,30 @@ class HomeFragment : Fragment() {
                 e.printStackTrace()
             }
         }
-        // 使用 arrayadapter 并定义一个数组
-        val users = arrayOf(
-                "Virat Kohli", "Rohit Sharma", "Steve Smith",
-                "Kane Williamson", "Ross Taylor"
-        )
-        binding.userlist.adapter =
-                context?.let { ArrayAdapter(it,android.R.layout.simple_list_item_1,users) }
+        // 渲染列表数据
+        listView = binding.listView
+        // 创建 HashMap 的 ArrayList。HashMap 的 key 是 String，VALUE 是任何数据类型（Any）
+        val list=ArrayList<HashMap<String,Any>>()
+        // 通过一个for循环，在HashMap中输入不同类型的数据，
+        // 并将包含其数据的地图添加到 ArrayList
+        // 作为列表项，此列表是 SimpleAdapter 的第二个参数
+        for(i in fruitNames.indices){
+            val map=HashMap<String,Any>()
+            // HashMap 中的数据输入
+            map["fruitName"] = fruitNames[i]
+            map["fruitImage"]=fruitImageIds[i]
+            // 将 HashMap 添加到 ArrayList
+            list.add(map)
+        }
+        // 创建一个字符串类型数组（来自），其中包含列表每一行中每个视图的列名
+        // 这个数组（表单）是 SimpleAdapter 的第四个参数
+        val from=arrayOf("fruitName","fruitImage")
+        // 创建一个整数类型数组（到），其中包含
+        // 列表每一行中每个视图的id，这个数组（表单）是SimpleAdapter的第五个参数
+        val to= intArrayOf(R.id.textView,R.id.imageView)
+        // 创建一个 SimpleAdapter 类的对象并传递所有必需的参数
+        val simpleAdapter= SimpleAdapter(context,list,R.layout.list_row_items,from,to)
+        listView.adapter = simpleAdapter
 
         return root
     }
