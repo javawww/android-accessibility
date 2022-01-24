@@ -8,6 +8,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -66,6 +67,14 @@ class HomeFragment : Fragment() {
                 e.printStackTrace()
             }
         }
+        // 使用 arrayadapter 并定义一个数组
+        val users = arrayOf(
+                "Virat Kohli", "Rohit Sharma", "Steve Smith",
+                "Kane Williamson", "Ross Taylor"
+        )
+        binding.userlist.adapter =
+                context?.let { ArrayAdapter(it,android.R.layout.simple_list_item_1,users) }
+
         return root
     }
 
