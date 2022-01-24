@@ -21,7 +21,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BaiduMapFragment">
+    tools:context=".ui.baidumap.BaiduMapFragment">
 
     <include layout="@layout/content_baidu_map_area" />
 

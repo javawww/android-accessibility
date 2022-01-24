@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.example.android.basicandroidaccessibility
+package com.example.android.basicandroidaccessibility.ui.baidumap
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -26,6 +25,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.baidu.location.*
 import com.baidu.mapapi.CoordType
 import com.baidu.mapapi.SDKInitializer
@@ -34,12 +34,18 @@ import com.baidu.mapapi.model.LatLng
 import com.baidu.mapapi.search.core.PoiInfo
 import com.baidu.mapapi.search.core.SearchResult
 import com.baidu.mapapi.search.geocode.*
+import com.example.android.basicandroidaccessibility.R
+import com.example.android.basicandroidaccessibility.databinding.ContentBaiduMapAreaBinding
 import com.google.gson.Gson
 import com.mumu.dialog.MMLoading
 
 
 open class BaiduMapFragment : Fragment() {
     private var TAG = "BaiduMapFragment"
+    private lateinit var baiduMapViewModel: BaiduMapViewModel
+    private var _binding: ContentBaiduMapAreaBinding? = null
+    // 此属性仅在 onCreateView 和 onDestroyView 之间有效。
+    private val binding get() = _binding!!
     private var dingwei: ImageView? = null  //定位图标
     private var position: TextView? = null // 定位信息
     private var mMapView: TextureMapView? = null
@@ -69,7 +75,9 @@ open class BaiduMapFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d(TAG, "onCreateView: ")
-        return inflater.inflate(R.layout.fragment_baidu_map_area, container, false)
+        baiduMapViewModel = ViewModelProvider(this).get(BaiduMapViewModel::class.java)
+        _binding = ContentBaiduMapAreaBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
