@@ -1,10 +1,12 @@
 package com.example.android.basicandroidaccessibility.ui.home
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +14,10 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.example.android.basicandroidaccessibility.R
 import com.example.android.basicandroidaccessibility.databinding.FragmentHomeBinding
+import com.example.android.basicandroidaccessibility.ui.user.UserDetailFragment
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -102,7 +106,22 @@ class HomeFragment : Fragment() {
         // 创建一个 SimpleAdapter 类的对象并传递所有必需的参数
         val simpleAdapter= SimpleAdapter(context,list,R.layout.list_row_items,from,to)
         listView.adapter = simpleAdapter
-
+        // listView点击事件
+        val contentLabelingFragment: View? = view?.findViewById(R.id.contentLabelingFragment)
+        listView.onItemClickListener = AdapterView.OnItemClickListener {
+            parent, view, position, id ->
+            Log.d("AdapterView", "OnItemClickListener: $contentLabelingFragment")
+            val selectedItemText = parent.getItemAtPosition(position)
+            textView.text = "Selected : $selectedItemText"
+            // 页面跳转
+            val arguments = Bundle()
+            if (contentLabelingFragment != null) {
+                Log.d("contentLabelingFragment", "ing请求详情页... ")
+                arguments.putString("name","张三")
+                Navigation.findNavController(contentLabelingFragment)
+                        .navigate(R.id.action_homeFragment_to_contentLabelingFragment,arguments)
+            }
+        }
         return root
     }
 
