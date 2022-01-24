@@ -37,7 +37,7 @@ android {
             res.srcDirs = [
                     'src/main/res/layout/user',
                     'src/main/res/layout',
-                    'src/main/res'
+                    'src/main/res',
             ]
         }
     }
