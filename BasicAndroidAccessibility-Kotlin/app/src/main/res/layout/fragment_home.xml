@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DAF3FE"
+    android:layout_margin="10dp"
     tools:context=".ui.home.HomeFragment">
 
 
@@ -18,14 +18,12 @@
         android:textStyle="bold"
         android:textSize="25sp" />
 
-
-    <TextView
-        android:text="TextView"
+    <ImageView
+        app:layout_constraintLeft_toRightOf="@+id/text_home"
+        app:layout_constraintTop_toTopOf="@+id/text_home"
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView2"
-        app:layout_constraintBaseline_toBaselineOf="@+id/text_home"
-        app:layout_constraintRight_toRightOf="@+id/text_home"
-        android:textSize="20sp" />
+        android:layout_centerInParent="true"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
