@@ -16,9 +16,13 @@
 
 package com.example.android.basicandroidaccessibility
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.WindowManager
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration

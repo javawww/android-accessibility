@@ -16,6 +16,9 @@
 
 package com.example.android.basicandroidaccessibility.ui.baidumap
 
+import android.Manifest
+import android.app.Activity
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -24,6 +27,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.baidu.location.*
@@ -70,6 +75,24 @@ open class BaiduMapFragment : Fragment() {
         //自4.3.0起，百度地图SDK所有接口均支持百度坐标和国测局坐标，用此方法设置您使用的坐标类型.
         //包括BD09LL和GCJ02两种坐标，默认是BD09LL坐标。
         SDKInitializer.setCoordType(CoordType.BD09LL)
+
+        var permissionList = ArrayList<String>()
+        if(context?.let { ContextCompat.checkSelfPermission(it, Manifest.permission.ACCESS_FINE_LOCATION) } != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+
+        if(context?.let { ContextCompat.checkSelfPermission(it,Manifest.permission.READ_PHONE_STATE) } != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.READ_PHONE_STATE)
+        }
+
+        if(context?.let { ContextCompat.checkSelfPermission(it,Manifest.permission.WRITE_EXTERNAL_STORAGE) } != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        }
+
+        if(permissionList.isNotEmpty()) {
+            var permissions = permissionList.toArray(arrayOfNulls<String>(permissionList.size))
+            ActivityCompat.requestPermissions(context as Activity,permissions,1)
+        }
 
     }
 
@@ -251,6 +274,27 @@ open class BaiduMapFragment : Fragment() {
     protected fun hideLoading() {
         if (mmLoading != null && mmLoading!!.isShowing) {
             mmLoading!!.dismiss()
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when (requestCode) {
+            1 -> {
+                if (grantResults.isNotEmpty()) {
+                    for (result in grantResults) {
+                        if (result != PackageManager.PERMISSION_GRANTED) {
+                            Toast.makeText(context, "必须同意所有权限才能使用本程序", Toast.LENGTH_SHORT).show()
+                            return
+                        }
+                    }
+                } else {
+                    Toast.makeText(context, "发生未知错误", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            else -> {
+
+            }
         }
     }
 }

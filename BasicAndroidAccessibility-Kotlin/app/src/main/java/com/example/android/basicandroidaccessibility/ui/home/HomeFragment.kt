@@ -24,6 +24,7 @@ import java.util.concurrent.Executors
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.android.basicandroidaccessibility.ui.user.LoginFragment
 import com.example.android.basicandroidaccessibility.ui.user.SignupFragment
@@ -124,7 +125,7 @@ class HomeFragment : Fragment() {
         }
 
         // 登陆注册
-        var tab_toolbar =  binding.toolbar
+//        var tab_toolbar =  binding.toolbar
         var tab_viewpager = binding.tabViewpager
         var tab_tablayout = binding.tabTablayout
 //        (activity as AppCompatActivity?)!!.setSupportActionBar(tab_toolbar)
@@ -141,10 +142,10 @@ class HomeFragment : Fragment() {
         adapter?.addFragment(LoginFragment(), "Login")
         adapter?.addFragment(SignupFragment(), "Signup")
         // setting adapter to view pager.
-        viewpager.setAdapter(adapter)
+        viewpager.adapter = adapter
     }
 
-    class ViewPagerAdapter : FragmentPagerAdapter {
+    class ViewPagerAdapter : FragmentStatePagerAdapter {
         // objects of arraylist. One is of Fragment type and
         // another one is of String type.*/
         private final var fragmentList1: ArrayList<Fragment> = ArrayList()

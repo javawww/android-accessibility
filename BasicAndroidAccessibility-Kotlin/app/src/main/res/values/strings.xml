@@ -15,7 +15,7 @@
 -->
 
 <resources>
-    <string name="app_name">慧客笔记</string>
+    <string name="app_name">慧客笔记1</string>
     <string name="title_home">主页</string>
     <string name="title_dashboard">仪表盘</string>
     <string name="title_notifications">通知</string>
