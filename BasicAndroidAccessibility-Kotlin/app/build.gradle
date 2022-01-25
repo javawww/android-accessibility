@@ -63,5 +63,6 @@ dependencies {
     // Android仿ios的自定义dialog，loading和toast
     implementation 'com.github.mamumu:mmDialog:1.2.0'
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
 }

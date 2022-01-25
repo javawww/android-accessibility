@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -20,6 +21,13 @@ import com.example.android.basicandroidaccessibility.databinding.FragmentHomeBin
 import com.example.android.basicandroidaccessibility.ui.user.UserDetailFragment
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
+import com.example.android.basicandroidaccessibility.ui.user.LoginFragment
+import com.example.android.basicandroidaccessibility.ui.user.SignupFragment
+
 
 class HomeFragment : Fragment() {
 
@@ -107,22 +115,62 @@ class HomeFragment : Fragment() {
         val simpleAdapter= SimpleAdapter(context,list,R.layout.list_row_items,from,to)
         listView.adapter = simpleAdapter
         // listView点击事件
-        val contentLabelingFragment: View? = view?.findViewById(R.id.contentLabelingFragment)
         listView.onItemClickListener = AdapterView.OnItemClickListener {
             parent, view, position, id ->
-            Log.d("AdapterView", "OnItemClickListener: $contentLabelingFragment")
+            Log.d("AdapterView", "OnItemClickListener: ")
             val selectedItemText = parent.getItemAtPosition(position)
             textView.text = "Selected : $selectedItemText"
             // 页面跳转
-            val arguments = Bundle()
-            if (contentLabelingFragment != null) {
-                Log.d("contentLabelingFragment", "ing请求详情页... ")
-                arguments.putString("name","张三")
-                Navigation.findNavController(contentLabelingFragment)
-                        .navigate(R.id.action_homeFragment_to_contentLabelingFragment,arguments)
-            }
         }
+
+        // 登陆注册
+        var tab_toolbar =  binding.toolbar
+        var tab_viewpager = binding.tabViewpager
+        var tab_tablayout = binding.tabTablayout
+//        (activity as AppCompatActivity?)!!.setSupportActionBar(tab_toolbar)
+        setupViewPager(tab_viewpager)
+        tab_tablayout.setupWithViewPager(tab_viewpager)
         return root
+    }
+
+    private fun setupViewPager(viewpager: ViewPager) {
+        var adapter: ViewPagerAdapter? = fragmentManager?.let { ViewPagerAdapter(it) }
+
+        // LoginFragment is the name of Fragment and the Login
+        // is a title of tab
+        adapter?.addFragment(LoginFragment(), "Login")
+        adapter?.addFragment(SignupFragment(), "Signup")
+        // setting adapter to view pager.
+        viewpager.setAdapter(adapter)
+    }
+
+    class ViewPagerAdapter : FragmentPagerAdapter {
+        // objects of arraylist. One is of Fragment type and
+        // another one is of String type.*/
+        private final var fragmentList1: ArrayList<Fragment> = ArrayList()
+        private final var fragmentTitleList1: ArrayList<String> = ArrayList()
+        // this is a secondary constructor of ViewPagerAdapter class.
+        public constructor(supportFragmentManager: FragmentManager)
+                : super(supportFragmentManager)
+        // returns which item is selected from arraylist of fragments.
+        override fun getItem(position: Int): Fragment {
+            return fragmentList1.get(position)
+        }
+
+        // returns which item is selected from arraylist of titles.
+        @Nullable
+        override fun getPageTitle(position: Int): CharSequence {
+            return fragmentTitleList1.get(position)
+        }
+        // returns the number of items present in arraylist.
+        override fun getCount(): Int {
+            return fragmentList1.size
+        }
+        // this function adds the fragment and title in 2 separate  arraylist.
+        fun addFragment(fragment: Fragment, title: String) {
+            fragmentList1.add(fragment)
+            fragmentTitleList1.add(title)
+        }
     }
 
     override fun onDestroyView() {
@@ -130,3 +178,4 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 }
+

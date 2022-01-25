@@ -6,6 +6,8 @@
     android:layout_height="match_parent">
 
     <TextView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/text_notifications"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,9 +15,42 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="20sp"/>
+
+    <Button
+        app:layout_constraintTop_toBottomOf="@id/text_notifications"
+        android:id="@+id/content_labeling_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/fragment_content_labeling" />
+
+    <Button
+        app:layout_constraintTop_toBottomOf="@id/content_labeling_button"
+        android:id="@+id/content_grouping_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/fragment_content_grouping" />
+
+    <Button
+        app:layout_constraintTop_toBottomOf="@id/content_grouping_button"
+        android:id="@+id/live_region_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/fragment_live_region" />
+
+    <Button
+        app:layout_constraintTop_toBottomOf="@id/live_region_button"
+        android:id="@+id/expand_touch_area_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/fragment_expand_touch_area" />
+
+    <Button
+        app:layout_constraintTop_toBottomOf="@id/expand_touch_area_button"
+        android:id="@+id/insufficient_contrast_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/fragment_insufficient_contrast" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

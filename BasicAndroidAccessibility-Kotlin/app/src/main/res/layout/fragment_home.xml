@@ -1,42 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- In order to use tabs, coordinator layout is useful-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="10dp"
-    tools:context=".ui.home.HomeFragment">
+    android:layout_height="match_parent">
+    <!--This appbarlayout covers the toolbar and tablayout-->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <!--toolbar is one component which is necessary
+            because if we not use this then title is not shown
+            when project executed-->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            app:title="@string/app_name"
+            android:visibility="visible"
+            android:background="#0F9D58"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+        <!-- tablayout 包含哪些对显示选项卡很重要-->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#0F9D58"
+            app:tabIndicatorColor="#FFF"
+            app:tabIndicatorHeight="3dp"
+            app:tabMode="fixed" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- view pager is used to open other fragment by using
+         left or right swip-->
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/tab_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_home"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:visibility="gone"
         android:textAppearance=
-            "@style/TextAppearance.MaterialComponents.Subtitle1"
-        tools:text="TextView" />
+            "@style/TextAppearance.MaterialComponents.Subtitle1"/>
 
     <ListView
-        app:layout_constraintLeft_toRightOf="@+id/text_home"
-        app:layout_constraintTop_toTopOf="@+id/text_home"
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="#000000"
         android:dividerHeight="3dp"
-        android:padding="5dp" />
+        android:padding="5dp"
+        android:visibility="gone"/>
 
 
     <ImageView
-        app:layout_constraintLeft_toRightOf="@+id/text_home"
-        app:layout_constraintTop_toTopOf="@+id/text_home"
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:visibility="gone"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
