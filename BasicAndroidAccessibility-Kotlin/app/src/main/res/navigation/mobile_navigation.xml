@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_baidumap"
         android:name="com.example.android.basicandroidaccessibility.ui.baidumap.BaiduMapFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:label="@string/title_baidumap"
+        tools:layout="@layout/fragment_navigation_baidumap" />
 
     <fragment
         android:id="@+id/navigation_notifications"

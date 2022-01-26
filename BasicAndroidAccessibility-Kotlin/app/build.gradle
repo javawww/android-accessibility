@@ -35,6 +35,7 @@ android {
     sourceSets {
         main {
             res.srcDirs = [
+                    'src/main/res/layout/baidumap',
                     'src/main/res/layout/user',
                     'src/main/res/layout',
                     'src/main/res',

@@ -40,7 +40,7 @@ import com.baidu.mapapi.search.core.PoiInfo
 import com.baidu.mapapi.search.core.SearchResult
 import com.baidu.mapapi.search.geocode.*
 import com.example.android.basicandroidaccessibility.R
-import com.example.android.basicandroidaccessibility.databinding.ContentBaiduMapAreaBinding
+import com.example.android.basicandroidaccessibility.databinding.FragmentNavigationBaidumapBinding
 import com.google.gson.Gson
 import com.mumu.dialog.MMLoading
 
@@ -48,7 +48,7 @@ import com.mumu.dialog.MMLoading
 open class BaiduMapFragment : Fragment() {
     private var TAG = "BaiduMapFragment"
     private lateinit var baiduMapViewModel: BaiduMapViewModel
-    private var _binding: ContentBaiduMapAreaBinding? = null
+    private var _binding: FragmentNavigationBaidumapBinding? = null
     // 此属性仅在 onCreateView 和 onDestroyView 之间有效。
     private val binding get() = _binding!!
     private var dingwei: ImageView? = null  //定位图标
@@ -99,7 +99,7 @@ open class BaiduMapFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d(TAG, "onCreateView: ")
         baiduMapViewModel = ViewModelProvider(this).get(BaiduMapViewModel::class.java)
-        _binding = ContentBaiduMapAreaBinding.inflate(inflater,container,false)
+        _binding = FragmentNavigationBaidumapBinding.inflate(inflater,container,false)
         return binding.root
     }
 
