@@ -16,20 +16,11 @@
 
 package com.example.android.basicandroidaccessibility
 
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.WindowManager
-import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.android.basicandroidaccessibility.databinding.ActivityMainBinding
-import com.example.android.basicandroidaccessibility.ui.user.UserDetailFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -37,23 +28,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        /*super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        val navController = Navigation.findNavController(this, R.id.my_nav_host_fragment)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        toolbar.setupWithNavController(navController, appBarConfiguration)*/
-
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val navView: BottomNavigationView = binding.navView
-
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         // 将每个菜单 ID 作为一组 ID 传递，因为每个菜单都应被视为顶级目的地。
 //        val appBarConfiguration = AppBarConfiguration(setOf(

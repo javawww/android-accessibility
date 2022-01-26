@@ -33,12 +33,12 @@ import com.example.android.basicandroidaccessibility.ui.user.SignupFragment
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
+    // 该属性仅在 onCreateView 和onDestroyView
     private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
     private var imageView: ImageView? = null  //图片
     // 声明执行器来解析 URL
     private val executor: ExecutorService = Executors.newSingleThreadExecutor()
-    // 该属性仅在 onCreateView 和onDestroyView
-    private val binding get() = _binding!!
     // 列表数据
     private lateinit var listView: ListView
     // 创建一个字符串类型数组（fruitNames），其中包含不同水果图像的名称
