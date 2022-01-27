@@ -113,7 +113,7 @@ open class BaiduMapFragment : Fragment() {
         mBaiduMap = mMapView!!.map
         mBaiduMap!!.isMyLocationEnabled = true//开启地图的定位图层
         initMap()
-        showLoading("定位中...")
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -225,13 +225,14 @@ open class BaiduMapFragment : Fragment() {
     }
 
     fun initMap() {
+        showLoading("定位中...")
         //定位初始化
         mLocationClient = LocationClient(activity!!.applicationContext)
         //通过LocationClientOption设置LocationClient相关参数
         val option = LocationClientOption()
         option.isOpenGps = true // 打开gps
         option.setCoorType("bd09ll") // 设置坐标类型
-        option.setScanSpan(5000)
+//        option.setScanSpan(5000)
         option.setIsNeedAddress(true)
 
         //设置locationClientOption
