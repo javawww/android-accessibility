@@ -14,6 +14,7 @@ import com.example.android.basicandroidaccessibility.databinding.LayoutLoginBind
 import com.example.android.basicandroidaccessibility.pojo.HttpResult
 import com.example.android.basicandroidaccessibility.pojo.Quote
 import com.example.android.basicandroidaccessibility.retrofite.RetrofitHelper
+import com.example.android.basicandroidaccessibility.util.DialogUtil
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -32,6 +33,7 @@ class LoginFragment : Fragment() {
         // 文本内容
         val textDesc: TextView = binding.textDesc
         //启动一个新的协程
+        context?.let { DialogUtil.showLoading("加载中...", it) }
         val quotesApi = RetrofitHelper.create(QuotesApi::class.java)
         GlobalScope.launch {
             val result = quotesApi.getQuotes()
@@ -39,6 +41,7 @@ class LoginFragment : Fragment() {
             Log.d("ayush: ", quoteList.toString())
             Log.d("ayush: ", quoteList?.results.toString())
             textDesc.text = "哈哈哈哈哈"
+            DialogUtil.hideLoading()
         }
 
         return root

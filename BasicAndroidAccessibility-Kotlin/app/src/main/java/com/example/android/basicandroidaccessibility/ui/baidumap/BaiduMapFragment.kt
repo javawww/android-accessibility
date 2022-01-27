@@ -41,8 +41,8 @@ import com.baidu.mapapi.search.core.SearchResult
 import com.baidu.mapapi.search.geocode.*
 import com.example.android.basicandroidaccessibility.R
 import com.example.android.basicandroidaccessibility.databinding.FragmentNavigationBaidumapBinding
+import com.example.android.basicandroidaccessibility.util.DialogUtil
 import com.google.gson.Gson
-import com.mumu.dialog.MMLoading
 
 
 open class BaiduMapFragment : Fragment() {
@@ -56,7 +56,7 @@ open class BaiduMapFragment : Fragment() {
     private var mMapView: TextureMapView? = null
     private var mBaiduMap: BaiduMap? = null
     private var mLocationClient: LocationClient? = null
-    private var mmLoading: MMLoading? = null
+
     //防止每次定位都重新设置中心点
     private var isFirstLocation = true
 
@@ -113,7 +113,7 @@ open class BaiduMapFragment : Fragment() {
         mBaiduMap = mMapView!!.map
         mBaiduMap!!.isMyLocationEnabled = true//开启地图的定位图层
         initMap()
-
+        
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -195,7 +195,7 @@ open class BaiduMapFragment : Fragment() {
     }
 
     private fun getdata(ll: LatLng) {
-        hideLoading()
+        DialogUtil.hideLoading()
         val geoCoder = GeoCoder.newInstance()
         val listener: OnGetGeoCoderResultListener = object : OnGetGeoCoderResultListener {
             // 反地理编码查询结果回调函数
@@ -225,7 +225,7 @@ open class BaiduMapFragment : Fragment() {
     }
 
     fun initMap() {
-        showLoading("定位中...")
+        context?.let { DialogUtil.showLoading("定位中...", it) }
         //定位初始化
         mLocationClient = LocationClient(activity!!.applicationContext)
         //通过LocationClientOption设置LocationClient相关参数
@@ -254,29 +254,6 @@ open class BaiduMapFragment : Fragment() {
         }
     }
 
-    protected fun showLoading(msg: String?) {
-        if (mmLoading == null) {
-            val builder = MMLoading.Builder(context)
-                    .setMessage(msg)
-                    .setCancelable(false)
-                    .setCancelOutside(false)
-            mmLoading = builder.create()
-        } else {
-            mmLoading!!.dismiss()
-            val builder = MMLoading.Builder(context)
-                    .setMessage(msg)
-                    .setCancelable(false)
-                    .setCancelOutside(false)
-            mmLoading = builder.create()
-        }
-        mmLoading!!.show()
-    }
-
-    protected fun hideLoading() {
-        if (mmLoading != null && mmLoading!!.isShowing) {
-            mmLoading!!.dismiss()
-        }
-    }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
