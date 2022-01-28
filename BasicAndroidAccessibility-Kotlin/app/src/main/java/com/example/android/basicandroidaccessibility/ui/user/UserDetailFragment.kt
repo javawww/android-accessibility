@@ -1,6 +1,7 @@
 package com.example.android.basicandroidaccessibility.ui.user
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,11 +23,13 @@ class UserDetailFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View?{
+        Log.d("用户详情Fragment", "onCreateView: ")
         userDetailViewModel = ViewModelProvider(this).get(UserDetailViewModel::class.java)
         _binding = FramentUserDetailBinding.inflate(inflater,container,false)
         // 赋值
         val textView: TextView = binding.textDetail
         userDetailViewModel.text.observe(viewLifecycleOwner,{
+            Log.d("文本赋值", "textView: ")
             textView.text = it
         })
         // bundle 取值

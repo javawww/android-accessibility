@@ -43,6 +43,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.SecondActivity" android:screenOrientation="portrait"/>
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="xEDZFg9RZwA4bnOvideP8CQ2FILR7fxH" />

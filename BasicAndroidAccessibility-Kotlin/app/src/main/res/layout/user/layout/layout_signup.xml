@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- This linear layout is used to show elements
-	in vertical or in horizontal linear manner -->
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.user.SignupFragment">
 
-    <!-- This TextView indicates new fragment is open -->
     <TextView
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/displayMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Fragment 2"
+        android:textSize="40sp"
+        android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:text="在线测试"
-        android:textColor="#0F9D58"
-        android:textSize="25sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
