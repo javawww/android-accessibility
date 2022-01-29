@@ -111,7 +111,10 @@ open class BaiduMapFragment : Fragment() {
         position = view!!.findViewById(R.id.position_text_view)
 
         mBaiduMap = mMapView!!.map
+        mMapView!!.showScaleControl(false) // 不显示地图比例尺
+        mMapView!!.showZoomControls(false) // 不显示地图缩放控件
         mBaiduMap!!.isMyLocationEnabled = true//开启地图的定位图层
+
         initMap()
         
     }

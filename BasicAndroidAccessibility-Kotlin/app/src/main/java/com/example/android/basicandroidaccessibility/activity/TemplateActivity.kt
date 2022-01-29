@@ -59,6 +59,7 @@ class TemplateActivity : AppCompatActivity() {
         // 返回：点击事件
         imageBack?.setOnClickListener {
             Toast.makeText(this, "返回", Toast.LENGTH_SHORT).show();
+            finish()
         }
     }
 
