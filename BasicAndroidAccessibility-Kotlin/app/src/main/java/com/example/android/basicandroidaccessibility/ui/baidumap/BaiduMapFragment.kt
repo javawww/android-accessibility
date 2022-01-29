@@ -19,6 +19,11 @@ package com.example.android.basicandroidaccessibility.ui.baidumap
 import android.Manifest
 import android.app.Activity
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.VectorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -29,9 +34,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.baidu.location.*
+import com.baidu.location.BDAbstractLocationListener
+import com.baidu.location.BDLocation
+import com.baidu.location.LocationClient
+import com.baidu.location.LocationClientOption
 import com.baidu.mapapi.CoordType
 import com.baidu.mapapi.SDKInitializer
 import com.baidu.mapapi.map.*
@@ -39,6 +48,9 @@ import com.baidu.mapapi.model.LatLng
 import com.baidu.mapapi.search.core.PoiInfo
 import com.baidu.mapapi.search.core.SearchResult
 import com.baidu.mapapi.search.geocode.*
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.example.android.basicandroidaccessibility.R
 import com.example.android.basicandroidaccessibility.databinding.FragmentNavigationBaidumapBinding
 import com.example.android.basicandroidaccessibility.util.DialogUtil
@@ -59,9 +71,39 @@ open class BaiduMapFragment : Fragment() {
 
     //防止每次定位都重新设置中心点
     private var isFirstLocation = true
-
+    // 设置marker图标
+    private var bitmap: BitmapDescriptor? = null
     //注册LocationListener监听器
-    var myLocationListener = MyLocationListener()
+    private var myLocationListener = MyLocationListener()
+    // 注册地图点击监听器
+    private var myLocationClickListener = MyLocationClickListener()
+
+    inner class MyLocationClickListener: BaiduMap.OnMapClickListener {
+        override fun onMapClick(latLng: LatLng?) {
+            Log.d("地图点击", "onMapClick: ")
+            var latitude = latLng?.latitude
+            var longitude = latLng?.longitude
+            Log.d(TAG, "经度：$longitude，纬度：$latitude")
+        }
+        override fun onMapPoiClick(mapPoi: MapPoi?) {
+            Log.d("地图点击", "onMapPoiClick: ")
+            var poiname = mapPoi?.name
+            Log.d(TAG, "名称: $poiname")
+            var latLng = mapPoi?.position
+            var latitude = latLng?.latitude
+            var longitude = latLng?.longitude
+            Log.d(TAG, "经度：$longitude，纬度：$latitude")
+            // 先清除图层
+//            mBaiduMap?.clear()
+            // 定义Marker坐标点
+            var point: LatLng = LatLng(latitude!!,longitude!!)
+            // 构建MarkerOption，用于在地图上添加Marker
+            var options: OverlayOptions = MarkerOptions()
+                .position(point).icon(bitmap)
+            // 在地图上面添加marker并显示
+            mBaiduMap?.addOverlay(options)
+        }
+    }
 
     //经纬度
     private var lat = 30.605927
@@ -116,7 +158,25 @@ open class BaiduMapFragment : Fragment() {
         mBaiduMap!!.isMyLocationEnabled = true//开启地图的定位图层
 
         initMap()
-        
+        // 点击地图监听器
+        val imageURL = "https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200x200-min.png"
+        Glide.with(this)
+            .asBitmap()
+            .load(R.drawable.ic_baseline_location_on_24)
+            .override(100,100)
+            .into(object : CustomTarget<Bitmap>(){
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    Log.d(TAG, "加载网络图片成功")
+//                    imageView.setImageBitmap(resource)
+                    bitmap = BitmapDescriptorFactory.fromBitmap(resource)
+                }
+                override fun onLoadCleared(placeholder: Drawable?) {
+                    //当 imageView 在生命周期调用或其他原因被清除时调用。
+                    // 如果您在此 imageView 以外的其他地方引用位图，
+                    // 请在此处清除它，因为您不能再拥有该位图
+                }
+            })
+        mBaiduMap?.setOnMapClickListener(myLocationClickListener)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
