@@ -15,11 +15,12 @@ import com.example.android.basicandroidaccessibility.R
 import com.example.android.basicandroidaccessibility.databinding.ActivityTemplateBinding
 
 
+
 class TemplateActivity : AppCompatActivity() {
 
     private var txtString: TextView? = null
-    private var imageSave: ImageButton? = null
-    private var imageBack: ImageButton? = null
+    private var imageSave: ImageView? = null
+    private var imageBack: ImageView? = null
 
     private var _binding: ActivityTemplateBinding? = null
     private val binding get() = _binding!!
@@ -27,13 +28,14 @@ class TemplateActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityTemplateBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_template)
+        setContentView(binding.root)
 
         txtString = binding.txtString
         imageSave = binding.imageSave
         imageBack = binding.imageBack
         // getting the bundle from the intent
         val bundle = intent.extras
+        bundle!!.getString("key1")?.let { Log.d("接受参数", it) }
 
         // setting the text in the textview
         txtString?.setText(bundle!!.getString("key1", "No value from MainActivity :("))
@@ -45,18 +47,22 @@ class TemplateActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         // 在工具栏中显示应用程序图标
-        supportActionBar?.setDisplayShowHomeEnabled(true)
+//        supportActionBar?.setDisplayShowHomeEnabled(true)
         //supportActionBar?.setLogo(R.drawable.logo_youtube)
-        supportActionBar?.setDisplayUseLogoEnabled(true)
+//        supportActionBar?.setDisplayUseLogoEnabled(true)
 
         // 保存：点击事件
         imageSave?.setOnClickListener {
             Log.d("保存", "保存的点击事件")
-            Toast.makeText(applicationContext, "保存", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "保存", Toast.LENGTH_SHORT).show();
         }
         // 返回：点击事件
         imageBack?.setOnClickListener {
             Toast.makeText(this, "返回", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+
+
 }
