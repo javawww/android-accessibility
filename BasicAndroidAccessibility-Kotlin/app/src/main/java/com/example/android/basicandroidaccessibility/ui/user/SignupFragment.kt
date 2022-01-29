@@ -48,16 +48,6 @@ class SignupFragment : Fragment() {
         // 绑定点击事件
         textDetail.setOnClickListener{
             Log.d("setOnClickListener", "触发点击事件: ")
-            requireActivity().run {
-                // creating the bundle instance
-                val bundle = Bundle()
-                // passing the data into the bundle
-                bundle?.putString("key1", "Passing Bundle From SignupFragment to 2nd Activity")
-                val intent = Intent(this, TemplateActivity::class.java)
-                intent.putExtras(bundle)
-                startActivity(intent)
-
-            }
 
         }
 
@@ -95,6 +85,15 @@ class SignupFragment : Fragment() {
         // Person子组件点击事件
         mAddPersonFab?.setOnClickListener {
             Toast.makeText(context, "Person Added", Toast.LENGTH_SHORT).show();
+            requireActivity().run {
+                // creating the bundle instance
+                val bundle = Bundle()
+                // passing the data into the bundle
+                bundle?.putString("key1", "Passing Bundle From SignupFragment to 2nd Activity")
+                val intent = Intent(this, TemplateActivity::class.java)
+                intent.putExtras(bundle)
+                startActivity(intent)
+            }
         }
         // Alarm子组件点击事件
         mAddAlarmFab?.setOnClickListener {
