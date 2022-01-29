@@ -7,13 +7,13 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.android.basicandroidaccessibility.R
 
-class SecondActivity : AppCompatActivity() {
+class TemplateActivity : AppCompatActivity() {
 
     var txtString: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_second)
+        setContentView(R.layout.activity_template)
 
         txtString = findViewById(R.id.txtString)
         // getting the bundle from the intent
