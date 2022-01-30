@@ -33,16 +33,16 @@ class LoginFragment : Fragment() {
         // 文本内容
         val textDesc: TextView = binding.textDesc
         //启动一个新的协程
-        context?.let { DialogUtil.showLoading("加载中...", it) }
+        /*context?.let { DialogUtil.showLoading("加载中...", it) }
         val quotesApi = RetrofitHelper.create(QuotesApi::class.java)
         GlobalScope.launch {
             val result = quotesApi.getQuotes()
             var quoteList: HttpResult<List<Quote>>? = result.body()
             Log.d("ayush: ", quoteList.toString())
             Log.d("ayush: ", quoteList?.results.toString())
-            textDesc.text = "哈哈哈哈哈"
             DialogUtil.hideLoading()
-        }
+        }*/
+        textDesc.text = "哈哈哈哈哈"
 
         return root
     }

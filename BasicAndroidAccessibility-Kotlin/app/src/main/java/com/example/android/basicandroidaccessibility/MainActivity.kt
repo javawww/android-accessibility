@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.android.andserver.ServerManager
 import com.example.android.basicandroidaccessibility.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -38,6 +39,9 @@ class MainActivity : AppCompatActivity() {
 //            R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
 //        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        // 启动andServer服务
+        ServerManager(this.applicationContext).startServer()
     }
 
 
