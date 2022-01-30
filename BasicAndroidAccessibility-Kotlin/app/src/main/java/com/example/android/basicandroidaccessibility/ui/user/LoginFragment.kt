@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.android.basicandroidaccessibility.R
+import com.example.android.basicandroidaccessibility.`interface`.HelloApi
 import com.example.android.basicandroidaccessibility.`interface`.QuotesApi
 import com.example.android.basicandroidaccessibility.databinding.FragmentHomeBinding
 import com.example.android.basicandroidaccessibility.databinding.LayoutLoginBinding
@@ -33,15 +34,15 @@ class LoginFragment : Fragment() {
         // 文本内容
         val textDesc: TextView = binding.textDesc
         //启动一个新的协程
-        /*context?.let { DialogUtil.showLoading("加载中...", it) }
-        val quotesApi = RetrofitHelper.create(QuotesApi::class.java)
+       context?.let { DialogUtil.showLoading("加载中...", it) }
+        val helloApi = RetrofitHelper.create(HelloApi::class.java)
         GlobalScope.launch {
-            val result = quotesApi.getQuotes()
-            var quoteList: HttpResult<List<Quote>>? = result.body()
-            Log.d("ayush: ", quoteList.toString())
-            Log.d("ayush: ", quoteList?.results.toString())
+            val result = helloApi.test()
+            var testVal: HttpResult<String>? = result.body()
+            Log.d("结果: ", result.toString()+"，$testVal")
+//            textDesc.text = testVal?.results
             DialogUtil.hideLoading()
-        }*/
+        }
         textDesc.text = "哈哈哈哈哈"
 
         return root

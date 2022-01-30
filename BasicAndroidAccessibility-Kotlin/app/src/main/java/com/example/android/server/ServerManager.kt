@@ -1,4 +1,4 @@
-package com.example.android.andserver
+package com.example.android.server
 
 import android.content.Context
 import android.util.Log

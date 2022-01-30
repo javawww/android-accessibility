@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object  RetrofitHelper {
 
-    private const val baseUrl = "https://quotable.io/"
+    private const val baseUrl = "https://517215b4.cpolar.io/"
 
     fun getInstance(): Retrofit {
         return Retrofit.Builder().baseUrl(baseUrl)
