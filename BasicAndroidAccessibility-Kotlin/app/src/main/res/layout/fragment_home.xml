@@ -53,15 +53,6 @@
         android:textAppearance=
             "@style/TextAppearance.MaterialComponents.Subtitle1"/>
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="#000000"
-        android:dividerHeight="3dp"
-        android:padding="5dp"
-        android:visibility="gone"/>
-
 
     <ImageView
         android:id="@+id/imageView"

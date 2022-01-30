@@ -66,7 +66,7 @@
         android:id="@+id/baiduMapFragment"
         android:name="com.example.android.basicandroidaccessibility.ui.baidumap.BaiduMapFragment"
         android:label="@string/fragment_baidu_map_area"
-        tools:layout="@layout/fragment_baidu_map_area" />
+        tools:layout="@layout/fragment_navigation_baidumap" />
 
     <fragment
         android:id="@+id/insufficientContrastFragment"

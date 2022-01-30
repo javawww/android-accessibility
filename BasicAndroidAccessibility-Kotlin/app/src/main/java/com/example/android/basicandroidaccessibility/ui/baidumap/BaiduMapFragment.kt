@@ -94,7 +94,7 @@ open class BaiduMapFragment : Fragment() {
             var longitude = latLng?.longitude
             Log.d(TAG, "经度：$longitude，纬度：$latitude")
             // 先清除图层
-//            mBaiduMap?.clear()
+            mBaiduMap?.clear()
             // 定义Marker坐标点
             var point: LatLng = LatLng(latitude!!,longitude!!)
             // 构建MarkerOption，用于在地图上添加Marker
