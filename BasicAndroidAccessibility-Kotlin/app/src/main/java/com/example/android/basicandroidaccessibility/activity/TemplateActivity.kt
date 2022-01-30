@@ -23,7 +23,7 @@ class TemplateActivity : AppCompatActivity() {
 
     // 四个文本字段
     var etFirstName: EditText? = null
-    var etLastName:EditText? = null
+    var etNickname:EditText? = null
     var etEmail:EditText? = null
     var etPassword:EditText? = null
 
@@ -44,7 +44,7 @@ class TemplateActivity : AppCompatActivity() {
         imageBack = binding.imageBack
         // 绑定内容表单
         etFirstName = binding.firstName
-        etLastName = binding.lastName
+        etNickname = binding.nickname
         etEmail = binding.email
         etPassword = binding.password
 
@@ -90,8 +90,8 @@ class TemplateActivity : AppCompatActivity() {
             etFirstName?.error = "This field is required"
             return false;
         }
-        if (etLastName?.length() == 0) {
-            etLastName?.error = "This field is required"
+        if (etNickname?.length() == 0) {
+            etNickname?.error = "This field is required"
             return false;
         }
         if (etEmail?.length() == 0) {

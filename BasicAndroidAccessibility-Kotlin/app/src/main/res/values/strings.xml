@@ -67,4 +67,6 @@
 
     <string name="fix_low_contrast">修复低对比度</string>
     <string name="baidu_map_txt">百度地图</string>
+
+    <string name="input_typing">请输入内容</string>
 </resources>

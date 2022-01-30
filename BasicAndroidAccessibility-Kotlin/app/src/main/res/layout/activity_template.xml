@@ -32,6 +32,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="16dp"
                 app:title="  用户 | 新增数据"
                 app:titleTextColor="#ffff" />
 
@@ -64,68 +65,120 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="6dp"
-        android:id="@+id/firstNameLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="用户名" />
-
-    <EditText
+    <LinearLayout
+        android:id="@+id/firstNameLL"
+        android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appBarLayout"
-        android:id="@+id/firstName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:hint="First Name"
-        android:inputType="text" />
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginStart="10dp"
+            android:id="@+id/firstNameLabel"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="用户名" />
+        <EditText
+            android:id="@+id/firstName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="5"
+            android:hint="@string/input_typing"
+            android:inputType="text" />
+    </LinearLayout>
 
-    <EditText
+    <LinearLayout
+        android:id="@+id/nicknameLL"
+        android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstName"
-        android:id="@+id/lastName"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/firstNameLL"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:hint="Last Name"
-        android:inputType="text" />
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginStart="10dp"
+            android:id="@+id/nicknameLabel"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="昵称" />
+        <EditText
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/firstNameLL"
+            android:id="@+id/nickname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="5"
+            android:hint="@string/input_typing"
+            android:inputType="text" />
+    </LinearLayout>
 
-    <EditText
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lastName"
-        android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:hint="Email"
-        android:inputType="textEmailAddress" />
 
-    <EditText
+    <LinearLayout
+        android:id="@+id/emailLL"
+        android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email"
-        android:id="@+id/password"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nicknameLL"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:hint="Password"
-        android:inputType="textPassword" />
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginStart="10dp"
+            android:id="@+id/emailLabel"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="邮箱" />
+        <EditText
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lastName"
+            android:id="@+id/email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="5"
+            android:hint="@string/input_typing"
+            android:inputType="textEmailAddress" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/passwordLL"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailLL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginStart="10dp"
+            android:id="@+id/passwordLabel"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="密码" />
+        <EditText
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email"
+            android:id="@+id/password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="5"
+            android:hint="@string/input_typing"
+            android:inputType="textPassword" />
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/txtString"
