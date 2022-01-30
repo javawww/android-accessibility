@@ -20,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.android.andserver.ServerManager
+import com.example.android.server.ServerManager
 import com.example.android.basicandroidaccessibility.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
