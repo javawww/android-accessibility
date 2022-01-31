@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         // 启动andServer服务
-        ServerManager(this.applicationContext).startServer()
+       // ServerManager(this.applicationContext).startServer()
     }
 
 

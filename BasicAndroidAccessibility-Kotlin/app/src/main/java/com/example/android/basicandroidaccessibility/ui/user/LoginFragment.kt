@@ -7,17 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.android.basicandroidaccessibility.R
-import com.example.android.basicandroidaccessibility.`interface`.HelloApi
-import com.example.android.basicandroidaccessibility.`interface`.QuotesApi
-import com.example.android.basicandroidaccessibility.databinding.FragmentHomeBinding
+import com.example.android.basicandroidaccessibility.`interface`.ExaminationApi
 import com.example.android.basicandroidaccessibility.databinding.LayoutLoginBinding
+import com.example.android.basicandroidaccessibility.pojo.Examination
 import com.example.android.basicandroidaccessibility.pojo.HttpResult
-import com.example.android.basicandroidaccessibility.pojo.Quote
 import com.example.android.basicandroidaccessibility.retrofite.RetrofitHelper
 import com.example.android.basicandroidaccessibility.util.DialogUtil
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import kotlin.math.log
 
 // 这里的“：”符号表示LoginFragment是Fragment Class的子类
 class LoginFragment : Fragment() {
@@ -34,16 +37,30 @@ class LoginFragment : Fragment() {
         // 文本内容
         val textDesc: TextView = binding.textDesc
         //启动一个新的协程
+        /*val examinationApi = RetrofitHelper.create(ExaminationApi::class.java)
+        val examinationCall: Call<List<Examination>> = examinationApi.listAll()
+        examinationCall.enqueue(object : Callback<List<Examination>>{
+            override fun onResponse(call: Call<List<Examination>>, response: Response<List<Examination>>
+            ) {
+                if(response.isSuccessful){
+                    Log.d("接口成功", "onResponse:${response.body()} ")
+                }
+            }
+            override fun onFailure(call: Call<List<Examination>>, t: Throwable) {
+                Log.d("接口报错", "onFailure: ${t.message} ")
+            }
+        })*/
        context?.let { DialogUtil.showLoading("加载中...", it) }
-        val helloApi = RetrofitHelper.create(HelloApi::class.java)
-        GlobalScope.launch {
-            val result = helloApi.test()
-            var testVal: HttpResult<String>? = result.body()
-            Log.d("结果: ", result.toString()+"，$testVal")
-//            textDesc.text = testVal?.results
-            DialogUtil.hideLoading()
+        val examinationApi = RetrofitHelper.create(ExaminationApi::class.java)
+        GlobalScope.launch(Dispatchers.IO) {
+            val result = examinationApi.listAll2()
+            Log.d("结果: ", "${result.body()}")
+            val examinations: List<Examination>? = result.body()
+            withContext(Dispatchers.Main){
+                textDesc.text = examinations?.get(0)?.analyze ?: "欢迎访问"
+                DialogUtil.hideLoading()
+            }
         }
-        textDesc.text = "哈哈哈哈哈"
 
         return root
     }
