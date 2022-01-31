@@ -32,6 +32,9 @@
         <activity android:name=".activity.TemplateActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ExaminationActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="xEDZFg9RZwA4bnOvideP8CQ2FILR7fxH" />

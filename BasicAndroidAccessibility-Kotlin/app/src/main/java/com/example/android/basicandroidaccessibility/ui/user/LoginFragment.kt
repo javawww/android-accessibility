@@ -1,18 +1,23 @@
 package com.example.android.basicandroidaccessibility.ui.user
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.android.basicandroidaccessibility.`interface`.ExaminationApi
+import com.example.android.basicandroidaccessibility.activity.ExaminationActivity
+import com.example.android.basicandroidaccessibility.activity.TemplateActivity
 import com.example.android.basicandroidaccessibility.databinding.LayoutLoginBinding
 import com.example.android.basicandroidaccessibility.pojo.Examination
 import com.example.android.basicandroidaccessibility.pojo.HttpResult
 import com.example.android.basicandroidaccessibility.retrofite.RetrofitHelper
 import com.example.android.basicandroidaccessibility.util.DialogUtil
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -28,6 +33,9 @@ class LoginFragment : Fragment() {
     // 该属性仅在 onCreateView 和onDestroyView
     private var _binding: LayoutLoginBinding? = null
     private val binding get() = _binding!!
+
+    //确保对所有 FAB 使用 FloatingActionButton
+    var mAddFab: FloatingActionButton? =null
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -61,7 +69,13 @@ class LoginFragment : Fragment() {
                 DialogUtil.hideLoading()
             }
         }
-
+        // 注册父节点
+        mAddFab = binding.addExamination
+        mAddFab?.setOnClickListener{
+            Toast.makeText(context, "新增测验记录", Toast.LENGTH_SHORT).show();
+            val intent = Intent(context, ExaminationActivity::class.java)
+            startActivity(intent)
+        }
         return root
     }
     // 这里“layout_login”是为 LoginFragment 创建的布局文件的名称

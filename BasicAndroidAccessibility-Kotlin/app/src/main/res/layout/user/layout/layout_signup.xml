@@ -20,9 +20,7 @@
         android:textColor="@color/black"/>
 
 
-    <!--这将是父浮动操作按钮
-    执行后右下角的浮动操作按钮
-    点击上面的按钮后会弹出以下两个按钮。所以这个按钮被认为是父FAB-->
+    <!--父浮动操作按钮-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_fab"
         android:layout_width="wrap_content"

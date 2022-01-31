@@ -17,11 +17,16 @@ import com.example.android.basicandroidaccessibility.databinding.ActivityTemplat
 
 class TemplateActivity : AppCompatActivity() {
 
+
+    private var _binding: ActivityTemplateBinding? = null
+    private val binding get() = _binding!!
+
+    // 顶部导航栏
     private var txtString: TextView? = null
     private var imageSave: ImageView? = null
     private var imageBack: ImageView? = null
 
-    // 四个文本字段
+    // 表单字段
     var etFirstName: EditText? = null
     var etNickname:EditText? = null
     var etEmail:EditText? = null
@@ -30,8 +35,6 @@ class TemplateActivity : AppCompatActivity() {
     // 校验标识符
     var isAllFieldsChecked: Boolean = false
 
-    private var _binding: ActivityTemplateBinding? = null
-    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +45,7 @@ class TemplateActivity : AppCompatActivity() {
         txtString = binding.txtString
         imageSave = binding.imageSave
         imageBack = binding.imageBack
-        // 绑定内容表单
+        // 表单内容
         etFirstName = binding.firstName
         etNickname = binding.nickname
         etEmail = binding.email
