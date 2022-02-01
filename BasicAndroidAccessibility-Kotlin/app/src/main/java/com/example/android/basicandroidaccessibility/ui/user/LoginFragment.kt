@@ -79,12 +79,12 @@ class LoginFragment : Fragment() , NoteClickInterface, NoteClickDeleteInterface 
         GlobalScope.launch(Dispatchers.IO) {
             val isReachable = UrlCheckUtil.reachable(RetrofitHelper.baseUrl)
             if(isReachable){
-                context?.let { DialogUtil.showLoading("加载中...", it) }
-                val examinationApi = RetrofitHelper.create(ExaminationApi::class.java)
-                val result = examinationApi.listAll2()
-                Log.d("结果: ", "${result.body()}")
-                val examinations: List<Examination>? = result.body()
                 withContext(Dispatchers.Main){
+                    context?.let { DialogUtil.showLoading("加载中...", it) }
+                    val examinationApi = RetrofitHelper.create(ExaminationApi::class.java)
+                    val result = examinationApi.listAll2()
+                    Log.d("结果: ", "${result.body()}")
+                    val examinations: List<Examination>? = result.body()
                     textDesc.text = examinations?.get(0)?.analyze ?: "欢迎访问"
                     DialogUtil.hideLoading()
                 }

@@ -46,14 +46,10 @@ object  RetrofitHelper {
             sslContext.init(null, trustAllCerts, SecureRandom())
 
             // Create an ssl socket factory with our all-trusting manager
-            val sslSocketFactory: SSLSocketFactory = sslContext.getSocketFactory()
+            val sslSocketFactory: SSLSocketFactory = sslContext.socketFactory
             val builder = OkHttpClient.Builder()
             builder.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
-            builder.hostnameVerifier(object : HostnameVerifier{
-                override fun verify(hostname: String?, session: SSLSession?): Boolean {
-                    return true
-                }
-            })
+            builder.hostnameVerifier { _, _ -> true }
             return builder
         } catch (e: Exception) {
             throw RuntimeException(e)
