@@ -8,6 +8,29 @@
     android:layout_height="match_parent"
     tools:context=".ui.user.LoginFragment">
 
+    <!--显示所有笔记的回收站视图-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/notesRV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        tools:listitem="@layout/note_rv_item" />
+
+    <!--fab for adding a new note-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_examination"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="66dp"
+        android:src="@drawable/ic_baseline_add_circle_outline_24"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:backgroundTint="@color/black"
+        app:tint="@color/white" />
+
     <!-- This TextView indicates new fragment is open -->
     <TextView
         android:id="@+id/text_desc"
@@ -20,20 +43,8 @@
         android:gravity="center"
         android:textColor="#0F9D58"
         android:textSize="25sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="gone"/>
 
-
-    <!--父浮动操作按钮-->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_examination"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="66dp"
-        android:src="@drawable/ic_baseline_add_circle_outline_24"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
