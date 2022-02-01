@@ -27,6 +27,7 @@ import com.example.android.basicandroidaccessibility.room.adapter.NoteRVAdapter
 import com.example.android.basicandroidaccessibility.room.entity.Note
 import com.example.android.basicandroidaccessibility.room.viewmodel.NoteViewModal
 import com.example.android.basicandroidaccessibility.util.DialogUtil
+import com.example.android.basicandroidaccessibility.util.UrlCheckUtil
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -75,17 +76,21 @@ class LoginFragment : Fragment() , NoteClickInterface, NoteClickDeleteInterface 
             }
         })*/
 
-       /*context?.let { DialogUtil.showLoading("加载中...", it) }
-        val examinationApi = RetrofitHelper.create(ExaminationApi::class.java)
         GlobalScope.launch(Dispatchers.IO) {
-            val result = examinationApi.listAll2()
-            Log.d("结果: ", "${result.body()}")
-            val examinations: List<Examination>? = result.body()
-            withContext(Dispatchers.Main){
-                textDesc.text = examinations?.get(0)?.analyze ?: "欢迎访问"
-                DialogUtil.hideLoading()
+            val isReachable = UrlCheckUtil.reachable(RetrofitHelper.baseUrl)
+            if(isReachable){
+                context?.let { DialogUtil.showLoading("加载中...", it) }
+                val examinationApi = RetrofitHelper.create(ExaminationApi::class.java)
+                val result = examinationApi.listAll2()
+                Log.d("结果: ", "${result.body()}")
+                val examinations: List<Examination>? = result.body()
+                withContext(Dispatchers.Main){
+                    textDesc.text = examinations?.get(0)?.analyze ?: "欢迎访问"
+                    DialogUtil.hideLoading()
+                }
             }
-        }*/
+        }
+
 
         notesRV = binding.notesRV
         // on below line we are setting layout

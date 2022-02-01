@@ -12,16 +12,16 @@ import javax.net.ssl.*
 
 object  RetrofitHelper {
 
-    private const val baseUrl = "https://ppp.free.idcfengye.com/"
+    const val baseUrl = "https://ppp.free.idcfengye.com/"
 
-    fun getInstance(): Retrofit {
+    private fun getInstance(): Retrofit {
         return Retrofit.Builder().baseUrl(baseUrl)
                 .client(getUnsafeOkHttpClient()?.readTimeout(100,TimeUnit.SECONDS)?.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
     }
 
-    fun getUnsafeOkHttpClient(): OkHttpClient.Builder? {
+    private fun getUnsafeOkHttpClient(): OkHttpClient.Builder? {
         return try {
             // Create a trust manager that does not validate certificate chains
             val trustAllCerts: Array<TrustManager> = arrayOf<TrustManager>(

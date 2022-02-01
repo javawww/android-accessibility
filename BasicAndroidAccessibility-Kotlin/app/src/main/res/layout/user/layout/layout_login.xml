@@ -44,7 +44,7 @@
         android:textColor="#0F9D58"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:visibility="gone"/>
+        android:visibility="visible"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
