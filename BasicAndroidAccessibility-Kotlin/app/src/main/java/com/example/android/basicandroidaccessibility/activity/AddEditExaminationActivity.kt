@@ -1,10 +1,12 @@
 package com.example.android.basicandroidaccessibility.activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.InputFilter
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
@@ -48,8 +50,14 @@ class AddEditExaminationActivity : AppCompatActivity() {
 
     // on below line we are creating variable for
     // viewmodal and and integer for our note id.
-    lateinit var viewModal: ExaminationViewModal
-    var primary = -1;
+    private lateinit var viewModal: ExaminationViewModal
+    var primary = -1
+
+    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        // Handle the returned Uri
+        Log.d("图片地址", ": $uri")
+        IVPreviewImage?.setImageURI(uri)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,10 +89,7 @@ class AddEditExaminationActivity : AppCompatActivity() {
         BSelectImage = binding.BSelectImage
         IVPreviewImage = binding.IVPreviewImage
         BSelectImage?.setOnClickListener {
-            var intent:Intent = Intent()
-            intent.type = "image/*"
-            intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(Intent.createChooser(intent,"选择图片"),SELECT_PICTURE)
+            getContent.launch("image/*")
         }
 
         // 将工具栏的 ID 分配给变量

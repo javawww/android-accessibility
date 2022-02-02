@@ -25,7 +25,8 @@
         app:tint="#6495ED"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="70dp"
-        android:clickable="true"/>
+        android:clickable="true"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/position_text_view"

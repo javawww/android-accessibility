@@ -16,14 +16,9 @@
 
 package com.example.android.basicandroidaccessibility.ui.baidumap
 
-import android.Manifest
-import android.app.Activity
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.VectorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -32,9 +27,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.baidu.location.BDAbstractLocationListener
@@ -53,7 +45,6 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.android.basicandroidaccessibility.R
 import com.example.android.basicandroidaccessibility.databinding.FragmentNavigationBaidumapBinding
-import com.example.android.basicandroidaccessibility.util.DialogUtil
 import com.google.gson.Gson
 
 
@@ -105,20 +96,18 @@ open class BaiduMapFragment : Fragment() {
         }
     }
 
-    //经纬度
-    private var lat = 30.605927
-    private var lon = 114.278816
+    //经纬度 珠江新城  113.333566,23.125733
+    private var lat = 23.125733
+    private var lon = 113.333566
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG, "onCreate: ")
         //在使用SDK各组件之前初始化context信息，传入ApplicationContext
-        SDKInitializer.initialize(activity!!.applicationContext)
-        //自4.3.0起，百度地图SDK所有接口均支持百度坐标和国测局坐标，用此方法设置您使用的坐标类型.
+        SDKInitializer.initialize(requireActivity().applicationContext)
         //包括BD09LL和GCJ02两种坐标，默认是BD09LL坐标。
         SDKInitializer.setCoordType(CoordType.BD09LL)
 
-        var permissionList = ArrayList<String>()
+        /*var permissionList = ArrayList<String>()
         if(context?.let { ContextCompat.checkSelfPermission(it, Manifest.permission.ACCESS_FINE_LOCATION) } != PackageManager.PERMISSION_GRANTED) {
             permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION)
         }
@@ -134,7 +123,7 @@ open class BaiduMapFragment : Fragment() {
         if(permissionList.isNotEmpty()) {
             var permissions = permissionList.toArray(arrayOfNulls<String>(permissionList.size))
             ActivityCompat.requestPermissions(context as Activity,permissions,1)
-        }
+        }*/
 
     }
 
@@ -148,16 +137,25 @@ open class BaiduMapFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "onViewCreated: ")
-        mMapView = view!!.findViewById(R.id.bmapView)
-        dingwei = view!!.findViewById(R.id.dingwei)
-        position = view!!.findViewById(R.id.position_text_view)
+        mMapView = binding.bmapView
+        dingwei = binding.dingwei
+        position = binding.positionTextView
 
         mBaiduMap = mMapView!!.map
         mMapView!!.showScaleControl(false) // 不显示地图比例尺
         mMapView!!.showZoomControls(false) // 不显示地图缩放控件
         mBaiduMap!!.isMyLocationEnabled = true//开启地图的定位图层
+        // c1 定位当前位置为中心
+        // initMap()
+        // c2 指定经纬度为中心
+        val cenpt = LatLng(lat, lon) //设定中心点坐标
+        val mMapStatus: MapStatus  = MapStatus.Builder()//定义地图状态
+            .target(cenpt)
+            .zoom(14F)
+            .build() //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
+        val mMapStatusUpdate:MapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+        mBaiduMap!!.setMapStatus(mMapStatusUpdate);//改变地图状态
 
-        initMap()
         // 点击地图监听器
         val imageURL = "https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200x200-min.png"
         Glide.with(this)
@@ -197,31 +195,32 @@ open class BaiduMapFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         //在activity执行onResume时执行mMapView. onResume ()，实现地图生命周期管理
-        isFirstLocation = true //每次重新进入Fragement时修改为true，保证能够显示中心点
-        mMapView!!.onResume()
+        //每次重新进入Fragement时修改为true，保证能够显示中心点
+//        isFirstLocation = true
+//        mMapView!!.onResume()
     }
 
     override fun onPause() {
         super.onPause()
         //在暂定时销毁定位，防止切换到其他Fragment再切回来时出现黑屏现象
-        mLocationClient!!.unRegisterLocationListener(myLocationListener)
-        mLocationClient!!.stop()
+//        mLocationClient!!.unRegisterLocationListener(myLocationListener)
+//        mLocationClient!!.stop()
         // 关闭定位图层
-        mBaiduMap!!.isMyLocationEnabled = false
+//        mBaiduMap!!.isMyLocationEnabled = false
         //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
-        mMapView!!.onPause()
+//        mMapView!!.onPause()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
         // 退出时销毁定位
-        mLocationClient!!.unRegisterLocationListener(myLocationListener)
-        mLocationClient!!.stop()
+//        mLocationClient!!.unRegisterLocationListener(myLocationListener)
+//        mLocationClient!!.stop()
         // 关闭定位图层
-        mBaiduMap!!.isMyLocationEnabled = false
-        mMapView!!.onDestroy()
-        mMapView = null
+//        mBaiduMap!!.isMyLocationEnabled = false
+//        mMapView!!.onDestroy()
+//        mMapView = null
     }
 
     inner class MyLocationListener : BDAbstractLocationListener() {
@@ -258,7 +257,7 @@ open class BaiduMapFragment : Fragment() {
     }
 
     private fun getdata(ll: LatLng) {
-        DialogUtil.hideLoading()
+        // DialogUtil.hideLoading()
         val geoCoder = GeoCoder.newInstance()
         val listener: OnGetGeoCoderResultListener = object : OnGetGeoCoderResultListener {
             // 反地理编码查询结果回调函数
@@ -288,9 +287,9 @@ open class BaiduMapFragment : Fragment() {
     }
 
     fun initMap() {
-        context?.let { DialogUtil.showLoading("定位中...", it) }
+        // context?.let { DialogUtil.showLoading("定位中...", it) }
         //定位初始化
-        mLocationClient = LocationClient(activity!!.applicationContext)
+        mLocationClient = LocationClient(requireActivity().applicationContext)
         //通过LocationClientOption设置LocationClient相关参数
         val option = LocationClientOption()
         option.isOpenGps = true // 打开gps
