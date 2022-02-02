@@ -10,22 +10,32 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
-import com.example.android.basicandroidaccessibility.activity.TemplateActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.android.basicandroidaccessibility.activity.AddEditExaminationActivity
 import com.example.android.basicandroidaccessibility.databinding.LayoutSignupBinding
+import com.example.android.basicandroidaccessibility.room.adapter.ExaminationRVAdapter
+import com.example.android.basicandroidaccessibility.room.adapter.ExaminationClickDeleteInterface
+import com.example.android.basicandroidaccessibility.room.adapter.ExaminationClickInterface
+import com.example.android.basicandroidaccessibility.room.entity.Examination
+import com.example.android.basicandroidaccessibility.room.viewmodel.ExaminationViewModal
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
-
-
-
 // 这里的“：”符号表示SignupFragment是Fragment Class的子类
-class SignupFragment : Fragment() {
-
+class SignupFragment : Fragment(), ExaminationClickInterface, ExaminationClickDeleteInterface {
 
     // 该属性仅在 onCreateView 和onDestroyView
     private var _binding: LayoutSignupBinding? = null
     private val binding get() = _binding!!
 
+    // on below line we are creating a variable
+    // for our recycler view, exit text, button and viewmodel.
+    lateinit var viewModal: ExaminationViewModal
+    lateinit var examinationsRV: RecyclerView
+    
     //确保对所有 FAB 使用 FloatingActionButton
     var mAddFab: FloatingActionButton? =null
     var mAddAlarmFab:FloatingActionButton? = null
@@ -45,12 +55,39 @@ class SignupFragment : Fragment() {
 
         // 文本内容
         val textDetail: TextView = binding.displayMessage
+        textDetail.visibility = View.GONE
         // 绑定点击事件
         textDetail.setOnClickListener{
             Log.d("setOnClickListener", "触发点击事件: ")
-
         }
 
+        /**
+         * 数据列表渲染
+         */
+        examinationsRV = binding.examinationsRV
+        examinationsRV.layoutManager = LinearLayoutManager(context)
+
+        // 初始化我们的适配器类。
+        val examinationRVAdapter = context?.let { ExaminationRVAdapter(it, this, this) }
+        // 将适配器设置为我们的页面列表视图
+        examinationsRV.adapter = examinationRVAdapter
+
+        // on below line we are
+        // initializing our view modal.
+        viewModal = ViewModelProvider(this).get(ExaminationViewModal::class.java)
+
+        // on below line we are calling all examinations method
+        // from our view modal class to observer the changes on list.
+        viewModal.allExaminations.observe(viewLifecycleOwner, Observer { list ->
+            list?.let {
+                // on below line we are updating our list.
+                examinationRVAdapter?.updateList(it)
+            }
+        })
+
+        /**
+         * 操作按钮事件注册
+         */
         // 注册父节点
         mAddFab = binding.addFab
         // 注册子节点
@@ -90,7 +127,7 @@ class SignupFragment : Fragment() {
                 val bundle = Bundle()
                 // passing the data into the bundle
                 bundle?.putString("key1", "Passing Bundle From SignupFragment to 2nd Activity")
-                val intent = Intent(this, TemplateActivity::class.java)
+                val intent = Intent(this, AddEditExaminationActivity::class.java)
                 intent.putExtras(bundle)
                 startActivity(intent)
             }
@@ -100,6 +137,22 @@ class SignupFragment : Fragment() {
             Toast.makeText(context, "Alarm Added", Toast.LENGTH_SHORT).show();
         }
         return root
+    }
+
+    override fun onDeleteIconClick(examination: Examination) {
+        viewModal.deleteExamination(examination)
+        // displaying a toast message
+        Toast.makeText(context, "${examination.question} Deleted", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onExaminationClick(examination: Examination) {
+        // opening a new intent and passing a data to it.
+        val intent = Intent(context, AddEditExaminationActivity::class.java)
+        intent.putExtra("noteType", "Edit")
+        intent.putExtra("noteTitle", examination.question)
+        intent.putExtra("noteDescription", examination.analyze)
+        intent.putExtra("noteId", examination.id)
+        startActivity(intent)
     }
     // Here "layout_signup" is a name of layout file
     // created for SignFragment

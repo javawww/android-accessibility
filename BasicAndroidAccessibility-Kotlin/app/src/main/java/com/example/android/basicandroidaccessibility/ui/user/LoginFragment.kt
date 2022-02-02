@@ -92,16 +92,13 @@ class LoginFragment : Fragment() , NoteClickInterface, NoteClickDeleteInterface 
         }
 
 
+        // 布局管理器设置为我们的线性布局视图。
         notesRV = binding.notesRV
-        // on below line we are setting layout
-        // manager to our recycler view.
         notesRV.layoutManager = LinearLayoutManager(context)
 
-        // on below line we are initializing our adapter class.
+        // 初始化我们的适配器类。
         val noteRVAdapter = context?.let { NoteRVAdapter(it, this, this) }
-
-        // on below line we are setting
-        // adapter to our recycler view.
+        // 将适配器设置为我们的页面列表视图
         notesRV.adapter = noteRVAdapter
 
         // on below line we are

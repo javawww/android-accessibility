@@ -34,7 +34,7 @@
         <activity android:name=".activity.TemplateActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.ExaminationActivity"
+        <activity android:name=".activity.AddEditExaminationActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.AddEditNoteActivity"

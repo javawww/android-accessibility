@@ -8,24 +8,23 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.basicandroidaccessibility.R
-import com.example.android.basicandroidaccessibility.room.entity.Note
+import com.example.android.basicandroidaccessibility.room.entity.Examination
 
-class NoteRVAdapter(
+class ExaminationRVAdapter(
     val context: Context,
-    private val noteClickDeleteInterface: NoteClickDeleteInterface,
-    private val noteClickInterface: NoteClickInterface
+    private val examinationClickDeleteInterface: ExaminationClickDeleteInterface,
+    private val examinationClickInterface: ExaminationClickInterface
 ) :
-    RecyclerView.Adapter<NoteRVAdapter.ViewHolder>() {
+    RecyclerView.Adapter<ExaminationRVAdapter.ViewHolder>() {
 
     // on below line we are creating a
-    // variable for our all notes list.
-    private val allNotes = ArrayList<Note>()
+    // variable for our all examinations list.
+    private val allExaminations = ArrayList<Examination>()
 
     // on below line we are creating a view holder class.
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        // on below line we are creating an initializing all our
-        // variables which we have added in layout file.
-        val noteTV: TextView = itemView.findViewById<TextView>(R.id.idTVNote)
+        // 正在创建一个初始化我们在布局文件中添加的所有变量。
+        val examinationTV: TextView = itemView.findViewById<TextView>(R.id.idTVQuestion)
         val dateTV: TextView = itemView.findViewById<TextView>(R.id.idTVDate)
         val deleteIV: ImageView = itemView.findViewById<ImageView>(R.id.idIVDelete)
     }
@@ -33,60 +32,60 @@ class NoteRVAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // inflating our layout file for each item of recycler view.
         val itemView = LayoutInflater.from(parent.context).inflate(
-            R.layout.note_rv_item,
+            R.layout.examination_rv_item,
             parent, false
         )
         return ViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        // on below line we are setting data to item of recycler view.
-        holder.noteTV.setText(allNotes.get(position).noteTitle)
-        holder.dateTV.setText("Last Updated : " + allNotes.get(position).timeStamp)
+        // 将数据设置为循环列表视图的项目.
+        holder.examinationTV.text = allExaminations[position].question
+        holder.dateTV.text = "更新于 : " + allExaminations[position].lastTime
         // on below line we are adding click listener to our delete image view icon.
         holder.deleteIV.setOnClickListener {
-            // on below line we are calling a note click
+            // on below line we are calling a examination click
             // interface and we are passing a position to it.
-            noteClickDeleteInterface.onDeleteIconClick(allNotes.get(position))
+            examinationClickDeleteInterface.onDeleteIconClick(allExaminations[position])
         }
 
         // on below line we are adding click listener
         // to our recycler view item.
         holder.itemView.setOnClickListener {
-            // on below line we are calling a note click interface
+            // on below line we are calling a examination click interface
             // and we are passing a position to it.
-            noteClickInterface.onNoteClick(allNotes.get(position))
+            examinationClickInterface.onExaminationClick(allExaminations[position])
         }
     }
 
     override fun getItemCount(): Int {
         // on below line we are
         // returning our list size.
-        return allNotes.size
+        return allExaminations.size
     }
 
-    // below method is use to update our list of notes.
-    fun updateList(newList: List<Note>) {
+    // below method is use to update our list of examinations.
+    fun updateList(newList: List<Examination>) {
         // on below line we are clearing
-        // our notes array list
-        allNotes.clear()
+        // our examinations array list
+        allExaminations.clear()
         // on below line we are adding a
-        // new list to our all notes list.
-        allNotes.addAll(newList)
+        // new list to our all examinations list.
+        allExaminations.addAll(newList)
         // on below line we are calling notify data
         // change method to notify our adapter.
         notifyDataSetChanged()
     }
 }
 
-interface NoteClickDeleteInterface {
+interface ExaminationClickDeleteInterface {
     // creating a method for click
     // action on delete image view.
-    fun onDeleteIconClick(note: Note)
+    fun onDeleteIconClick(examination: Examination)
 }
 
-interface NoteClickInterface {
+interface ExaminationClickInterface {
     // creating a method for click action
     // on recycler view item for updating it.
-    fun onNoteClick(note: Note)
+    fun onExaminationClick(examination: Examination)
 }
