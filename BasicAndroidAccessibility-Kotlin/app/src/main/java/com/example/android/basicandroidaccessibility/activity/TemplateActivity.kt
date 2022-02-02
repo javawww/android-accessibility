@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.android.basicandroidaccessibility.R
 import com.example.android.basicandroidaccessibility.databinding.ActivityTemplateBinding
+import kotlin.system.exitProcess
 
 
 class TemplateActivity : AppCompatActivity() {
@@ -84,7 +85,7 @@ class TemplateActivity : AppCompatActivity() {
         imageBack?.setOnClickListener {
             Toast.makeText(this, "返回", Toast.LENGTH_SHORT).show();
             this.finish()
-            System.exit(0)
+            exitProcess(0)
         }
     }
 

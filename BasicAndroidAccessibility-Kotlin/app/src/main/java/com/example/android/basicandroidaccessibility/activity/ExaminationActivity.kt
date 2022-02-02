@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar
 import com.example.android.basicandroidaccessibility.R
 import com.example.android.basicandroidaccessibility.databinding.ActivityExaminationBinding
 import com.example.android.basicandroidaccessibility.filter.InputFilterMinMax
+import kotlin.system.exitProcess
 
 
 class ExaminationActivity : AppCompatActivity() {
@@ -66,7 +67,7 @@ class ExaminationActivity : AppCompatActivity() {
         imageBack?.setOnClickListener {
             Toast.makeText(this, "返回", Toast.LENGTH_SHORT).show();
             this.finish()
-            System.exit(0)
+            exitProcess(0)
         }
     }
 

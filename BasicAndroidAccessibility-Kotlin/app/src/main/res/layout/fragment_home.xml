@@ -53,12 +53,4 @@
         android:textAppearance=
             "@style/TextAppearance.MaterialComponents.Subtitle1"/>
 
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone"/>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

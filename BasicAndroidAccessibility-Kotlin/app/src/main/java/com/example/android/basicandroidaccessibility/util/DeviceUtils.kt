@@ -16,7 +16,7 @@ object DeviceUtils {
         return id ?: ""
     }
 
-    private fun getDeviceUUid(context: Context): String? {
+    fun getDeviceUUid(context: Context): String? {
         val androidId = getAndroidID(context)
         val deviceUuid = UUID(androidId.hashCode().toLong(), androidId.hashCode().toLong() shl 32)
         return deviceUuid.toString()

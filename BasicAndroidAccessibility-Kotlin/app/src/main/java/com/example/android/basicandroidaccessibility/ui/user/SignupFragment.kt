@@ -22,6 +22,7 @@ import com.example.android.basicandroidaccessibility.room.adapter.ExaminationCli
 import com.example.android.basicandroidaccessibility.room.entity.Examination
 import com.example.android.basicandroidaccessibility.room.viewmodel.ExaminationViewModal
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.gson.Gson
 
 
 // 这里的“：”符号表示SignupFragment是Fragment Class的子类
@@ -121,7 +122,6 @@ class SignupFragment : Fragment(), ExaminationClickInterface, ExaminationClickDe
         }
         // Person子组件点击事件
         mAddPersonFab?.setOnClickListener {
-            Toast.makeText(context, "Person Added", Toast.LENGTH_SHORT).show();
             requireActivity().run {
                 // creating the bundle instance
                 val bundle = Bundle()
@@ -146,12 +146,18 @@ class SignupFragment : Fragment(), ExaminationClickInterface, ExaminationClickDe
     }
 
     override fun onExaminationClick(examination: Examination) {
+        Log.d("onExaminationClick", ": ${Gson().toJson(examination)}")
         // opening a new intent and passing a data to it.
         val intent = Intent(context, AddEditExaminationActivity::class.java)
-        intent.putExtra("noteType", "Edit")
-        intent.putExtra("noteTitle", examination.question)
-        intent.putExtra("noteDescription", examination.analyze)
-        intent.putExtra("noteId", examination.id)
+        intent.putExtra("optType", "Edit")
+        intent.putExtra("primary", examination.id)
+        intent.putExtra("question", examination.question)
+        intent.putExtra("ans1", examination.ans1)
+        intent.putExtra("ans2",examination.ans2)
+        intent.putExtra("ans3",examination.ans3)
+        intent.putExtra("ans4",examination.ans4)
+        intent.putExtra("correct",examination.correct)
+        intent.putExtra("analyze",examination.analyze)
         startActivity(intent)
     }
     // Here "layout_signup" is a name of layout file

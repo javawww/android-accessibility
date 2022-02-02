@@ -36,7 +36,6 @@ class HomeFragment : Fragment() {
     // 该属性仅在 onCreateView 和onDestroyView
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private var imageView: ImageView? = null  //图片
     // 声明执行器来解析 URL
     private val executor: ExecutorService = Executors.newSingleThreadExecutor()
 
@@ -56,29 +55,6 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
-        // 图片内容
-        imageView = binding.imageView
-        // 一旦 executor 解析 URL 并接收到图像，处理程序将在 ImageView 中加载它
-        val handler = Handler(Looper.getMainLooper())
-        // 初始化图像
-        var image: Bitmap? = null
-        // 仅用于后台进程（可能需要时间，具体取决于 Internet 速度）
-        executor.execute{
-            // Image URL
-            val imageURL = "https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200x200-min.png"
-            try {
-                val `in` = java.net.URL(imageURL).openStream()
-                image = BitmapFactory.decodeStream(`in`)
-                // 仅用于在 UI 中进行更改
-                handler.post {
-                    imageView!!.setImageBitmap(image)
-                }
-            }
-            // 如果 URL 不指向图像或任何其他类型的故障
-            catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
         // 登陆注册
 //        var tab_toolbar =  binding.toolbar
         var tab_viewpager = binding.tabViewpager
@@ -94,8 +70,8 @@ class HomeFragment : Fragment() {
 
         // LoginFragment is the name of Fragment and the Login
         // is a title of tab
-        adapter?.addFragment(LoginFragment(), "Login")
-        adapter?.addFragment(SignupFragment(), "Signup")
+        adapter?.addFragment(LoginFragment(), "博客")
+        adapter?.addFragment(SignupFragment(), "测验")
         // setting adapter to view pager.
         viewpager.adapter = adapter
     }
@@ -110,13 +86,13 @@ class HomeFragment : Fragment() {
                 : super(supportFragmentManager)
         // returns which item is selected from arraylist of fragments.
         override fun getItem(position: Int): Fragment {
-            return fragmentList1.get(position)
+            return fragmentList1[position]
         }
 
         // returns which item is selected from arraylist of titles.
         @Nullable
         override fun getPageTitle(position: Int): CharSequence {
-            return fragmentTitleList1.get(position)
+            return fragmentTitleList1[position]
         }
         // returns the number of items present in arraylist.
         override fun getCount(): Int {

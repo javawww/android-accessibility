@@ -17,7 +17,7 @@ interface ExaminationsDao {
     suspend fun delete(examination: Examination)
 
     // 查询并id排序
-    @Query("Select * from examinationsTable order by id desc")
+    @Query("select * from examinationsTable order by id desc")
     fun getAllExaminations(): LiveData<List<Examination>>
 
     // 更新方法

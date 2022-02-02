@@ -31,11 +31,11 @@
             android:id="@+id/idTVDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/idTVNote"
+            android:layout_below="@id/idTVQuestion"
             android:layout_margin="3dp"
             android:layout_toLeftOf="@id/idIVDelete"
             android:padding="4dp"
-            android:text="Updated At"
+            android:text="更新于:"
             android:textColor="@color/white"
             android:textSize="13sp" />
 
